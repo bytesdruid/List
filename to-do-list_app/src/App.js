@@ -42,11 +42,18 @@ function App() {
     <Container>
       <h1 className='top-div'>Critical Task List</h1>
       <div>
-        <div className='centered-div'><Button variant="outlined" className='button-pera'
+        <div className='centered-div'><Button variant="outlined" color="primary"
           onClick={isConnectedToPeraWallet ? handleDisconnectWalletClick : handleConnectionWalletClick
           }>
           {isConnectedToPeraWallet ? "Disconnect": "Connect to Pera Wallet"}
         </Button></div>
+      </div>
+      <div>
+        <div className='centered-div'><Button variant="outlined" color="primary"
+            onClick={isConnectedToPeraWallet ? handleDisconnectWalletClick : handleConnectionWalletClick
+            }>
+            {isConnectedToPeraWallet ? "Disconnect": "Connect to Pera Wallet"}
+          </Button></div>
       </div>
     </Container>
   );

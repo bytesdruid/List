@@ -55,12 +55,24 @@ byte "Change_Title"
 bnz main_l15
 err
 main_l15:
+txn NumAppArgs
+int 2
+==
+assert
+txn Sender
+global CreatorAddress
+==
+assert
 byte "Title"
 txna ApplicationArgs 1
 app_global_put
 int 1
 return
 main_l16:
+txn NumAppArgs
+int 1
+==
+assert
 txn Sender
 byte "8"
 byte "true"
@@ -68,6 +80,10 @@ app_local_put
 int 1
 return
 main_l17:
+txn NumAppArgs
+int 1
+==
+assert
 txn Sender
 byte "5"
 byte "true"
@@ -75,6 +91,10 @@ app_local_put
 int 1
 return
 main_l18:
+txn NumAppArgs
+int 1
+==
+assert
 txn Sender
 byte "2"
 byte "true"
@@ -82,6 +102,10 @@ app_local_put
 int 1
 return
 main_l19:
+txn NumAppArgs
+int 4
+==
+assert
 txn Sender
 byte "6"
 txna ApplicationArgs 2
@@ -97,6 +121,10 @@ app_local_put
 int 1
 return
 main_l20:
+txn NumAppArgs
+int 4
+==
+assert
 txn Sender
 byte "3"
 txna ApplicationArgs 2
@@ -112,6 +140,10 @@ app_local_put
 int 1
 return
 main_l21:
+txn NumAppArgs
+int 4
+==
+assert
 txn Sender
 byte "0"
 txna ApplicationArgs 2

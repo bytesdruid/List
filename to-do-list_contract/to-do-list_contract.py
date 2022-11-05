@@ -13,6 +13,10 @@ def approval_program():
 
     # allows you to change the global app title
     change_title = Seq(
+        # asserts that there should only be two app args
+        Assert(Txn.application_args.length() == Int(2)),
+        # only the app creator may change the title
+        Assert(Txn.sender() == Global.creator_address()),
         # changes the title global key to the value provided in the app arg array
         App.globalPut(Bytes("Title"), Txn.application_args[1]),
         # approve sequence
@@ -32,6 +36,8 @@ def approval_program():
 
     # sets task 1
     set_item_1 = Seq([
+        # expecting four app args
+        Assert(Txn.application_args.length() == Int(4)),
         # task name
         App.localPut(Txn.sender(), Bytes('0'), Txn.application_args[2]),
         # description of task
@@ -44,6 +50,8 @@ def approval_program():
 
     # sets task 2
     set_item_2 = Seq([
+        # expecting four app args
+        Assert(Txn.application_args.length() == Int(4)),
         # task name
         App.localPut(Txn.sender(), Bytes('3'), Txn.application_args[2]),
         # description of task
@@ -56,6 +64,8 @@ def approval_program():
 
     # sets task 3
     set_item_3 = Seq([
+        # expecting four app args
+        Assert(Txn.application_args.length() == Int(4)),
         # task name
         App.localPut(Txn.sender(), Bytes('6'), Txn.application_args[2]),
         # description of task
@@ -68,6 +78,8 @@ def approval_program():
 
     # subroutines to mark task 1 complete
     mark_complete_1 = Seq(
+        # expecting one app arg
+        Assert(Txn.application_args.length() == Int(1)),
         # sets complete to true
         App.localPut(Txn.sender(), Bytes('2'), Bytes('true')),
         # approve sequence
@@ -76,6 +88,8 @@ def approval_program():
 
     # subroutines to mark task 2 complete
     mark_complete_2 = Seq(
+        # expecting one app arg
+        Assert(Txn.application_args.length() == Int(1)),
         # sets complete to true
         App.localPut(Txn.sender(), Bytes('5'), Bytes('true')),
         # approve sequence
@@ -84,6 +98,8 @@ def approval_program():
 
     # subroutines to mark task 3 complete
     mark_complete_3 = Seq(
+        # expecting one app arg
+        Assert(Txn.application_args.length() == Int(1)),
         # sets complete to true
         App.localPut(Txn.sender(), Bytes('8'), Bytes('true')),
         # approve sequence

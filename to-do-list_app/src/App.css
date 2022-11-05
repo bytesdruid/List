@@ -1,6 +1,6 @@
 .top-div {
   display: flex;
-  align-items: left;
+  align-items: center;
   justify-content: center;
   height: 10vh;
 }
@@ -18,6 +18,35 @@
   margin: lem;
   color: green;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .App {
   text-align: center;
