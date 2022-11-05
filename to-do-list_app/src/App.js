@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import Button from '@material-ui/core/Button';
 
 // instantiates pera wallet connection
 const peraWallet = new PeraWalletConnect();
@@ -39,10 +40,14 @@ function App() {
 
   return (
     <Container>
-      <h1>Critical Task List</h1>
-      {/* When this button is clicked it will connect to pera if it is currently disconnected, otherwise will connect. */}
-      <Button onClick={isConnectedToPeraWallet ? handleDisconnectWalletClick : handleConnectionWalletClick}>
-      </Button>
+      <h1 className='top-div'>Critical Task List</h1>
+      <div>
+        <div className='centered-div'><Button variant="outlined" className='button-pera'
+          onClick={isConnectedToPeraWallet ? handleDisconnectWalletClick : handleConnectionWalletClick
+          }>
+          {isConnectedToPeraWallet ? "Disconnect": "Connect to Pera Wallet"}
+        </Button></div>
+      </div>
     </Container>
   );
 
