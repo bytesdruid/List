@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {PeraWalletConnect} from '@perawallet/connect';
 import algosdk from 'algosdk';
+import { useEffect } from 'react';
 
 // instantiates pera wallet connection
 const peraWallet = new PeraWalletConnect();
@@ -13,6 +14,20 @@ const appIndex = 120454587;
 const algod = new algosdk.Algodv2('','https://testnet-api.algonode.cloud', 443);
 
 function App() {
+  // when component is mounted reconnect pera wallet session
+
+  useEffect(() => {
+    peraWallet.reconnectSession().then((accounts) => {
+      // disconnection event listener
+      peraWallet.connector?.on('disconnect', handleDisconnectWalletClick);
+  
+      if (accounts.length) {
+        setAccountAddress(accounts[0]);
+      }
+    })
+
+  })
+
   return (
     <div className="App">
       <header className="App-header">
@@ -31,6 +46,14 @@ function App() {
       </header>
     </div>
   );
+}
+
+// function that handles the wallet UI click to disconnect
+function handleDisconnectWalletClick() {
+  // disconnects the wallet
+  peraWallet.disconnect();
+  // sets the account address to null value
+  setAccountAddress(null);
 }
 
 export default App;
