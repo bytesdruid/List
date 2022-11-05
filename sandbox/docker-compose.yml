@@ -26,7 +26,7 @@ services:
       - ${CDT_PORT:-9392}:9392
     volumes:
       - type: bind
-        source: ../to-do-list
+        source: ../to-do-list_contract
         target: /data
 
   indexer:
