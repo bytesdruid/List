@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 // instantiates pera wallet connection
 const peraWallet = new PeraWalletConnect();
@@ -17,7 +18,10 @@ const appIndex = 120454587;
 const algod = new algosdk.Algodv2('','https://testnet-api.algonode.cloud', 443);
 
 function App() {
+  // state for account address
   const [accountAddress, setAccountAddress] = useState(null);
+  // state of connection to pera wallet
+  const isConnectedToPeraWallet = !!accountAddress;
 
   useEffect(() => {
     // when component is mounted reconnect pera wallet session
@@ -35,10 +39,9 @@ function App() {
   return (
     <Container>
       <h1>Critical Task List</h1>
-      <Row>
-        <Col>
-        </Col>
-      </Row>
+      {/* When this button is clicked it will connect to pera if it is currently disconnected, otherwise will connect. */}
+      <Button onClick={isConnectedToPeraWallet ? handleDisconnectWalletClick : handleConnectionWalletClick}>
+      </Button>
     </Container>
   );
 
