@@ -7,7 +7,7 @@ from pyteal import *
 def approval_program():
     handle_creation = Seq([
         # sets the global put as To-Do List
-        App.globalPut(Bytes("Dapp_Title"), Bytes("Critical Task List")),
+        App.globalPut(Bytes("dApp Title"), Bytes("Critical Task List")),
         Return(Int(1))
     ])
 
@@ -18,7 +18,7 @@ def approval_program():
         # only the app creator may change the title
         Assert(Txn.sender() == Global.creator_address()),
         # changes the title global key to the value provided in the app arg array
-        App.globalPut(Bytes("Title"), Txn.application_args[1]),
+        App.globalPut(Bytes("dApp Title"), Txn.application_args[1]),
         # approve sequence
         Return(Int(1))
     )

@@ -63,7 +63,7 @@ txn Sender
 global CreatorAddress
 ==
 assert
-byte "Title"
+byte "dApp Title"
 txna ApplicationArgs 1
 app_global_put
 int 1
@@ -175,7 +175,7 @@ app_local_put
 int 1
 return
 main_l26:
-byte "Dapp_Title"
+byte "dApp Title"
 byte "Critical Task List"
 app_global_put
 int 1
