@@ -75,7 +75,7 @@ int 1
 assert
 txn Sender
 byte "8"
-byte "true"
+byte "complete"
 app_local_put
 int 1
 return
@@ -86,7 +86,7 @@ int 1
 assert
 txn Sender
 byte "5"
-byte "true"
+byte "complete"
 app_local_put
 int 1
 return
@@ -97,64 +97,64 @@ int 1
 assert
 txn Sender
 byte "2"
-byte "true"
+byte "complete"
 app_local_put
 int 1
 return
 main_l19:
 txn NumAppArgs
-int 4
+int 3
 ==
 assert
 txn Sender
 byte "6"
-txna ApplicationArgs 2
+txna ApplicationArgs 1
 app_local_put
 txn Sender
 byte "7"
-txna ApplicationArgs 3
+txna ApplicationArgs 2
 app_local_put
 txn Sender
 byte "8"
-byte "false"
+byte "incomplete"
 app_local_put
 int 1
 return
 main_l20:
 txn NumAppArgs
-int 4
+int 3
 ==
 assert
 txn Sender
 byte "3"
-txna ApplicationArgs 2
+txna ApplicationArgs 1
 app_local_put
 txn Sender
 byte "4"
-txna ApplicationArgs 3
+txna ApplicationArgs 2
 app_local_put
 txn Sender
 byte "5"
-byte "false"
+byte "incomplete"
 app_local_put
 int 1
 return
 main_l21:
 txn NumAppArgs
-int 4
+int 3
 ==
 assert
 txn Sender
 byte "0"
-txna ApplicationArgs 2
+txna ApplicationArgs 1
 app_local_put
 txn Sender
 byte "1"
-txna ApplicationArgs 3
+txna ApplicationArgs 2
 app_local_put
 txn Sender
 byte "2"
-byte "false"
+byte "incomplete"
 app_local_put
 int 1
 return

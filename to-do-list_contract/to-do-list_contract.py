@@ -37,13 +37,13 @@ def approval_program():
     # sets task 1
     set_item_1 = Seq([
         # expecting four app args
-        Assert(Txn.application_args.length() == Int(4)),
+        Assert(Txn.application_args.length() == Int(3)),
         # task name
-        App.localPut(Txn.sender(), Bytes('0'), Txn.application_args[2]),
+        App.localPut(Txn.sender(), Bytes('0'), Txn.application_args[1]),
         # description of task
-        App.localPut(Txn.sender(), Bytes('1'), Txn.application_args[3]),
+        App.localPut(Txn.sender(), Bytes('1'), Txn.application_args[2]),
         # intializes complete to false
-        App.localPut(Txn.sender(), Bytes('2'), Bytes('false')),
+        App.localPut(Txn.sender(), Bytes('2'), Bytes('incomplete')),
         # approve sequence
         Return(Int(1))
     ])
@@ -51,13 +51,13 @@ def approval_program():
     # sets task 2
     set_item_2 = Seq([
         # expecting four app args
-        Assert(Txn.application_args.length() == Int(4)),
+        Assert(Txn.application_args.length() == Int(3)),
         # task name
-        App.localPut(Txn.sender(), Bytes('3'), Txn.application_args[2]),
+        App.localPut(Txn.sender(), Bytes('3'), Txn.application_args[1]),
         # description of task
-        App.localPut(Txn.sender(), Bytes('4'), Txn.application_args[3]),
+        App.localPut(Txn.sender(), Bytes('4'), Txn.application_args[2]),
         # intializes complete to false
-        App.localPut(Txn.sender(), Bytes('5'), Bytes('false')),
+        App.localPut(Txn.sender(), Bytes('5'), Bytes('incomplete')),
         # approve sequence
         Return(Int(1))
     ])
@@ -65,13 +65,13 @@ def approval_program():
     # sets task 3
     set_item_3 = Seq([
         # expecting four app args
-        Assert(Txn.application_args.length() == Int(4)),
+        Assert(Txn.application_args.length() == Int(3)),
         # task name
-        App.localPut(Txn.sender(), Bytes('6'), Txn.application_args[2]),
+        App.localPut(Txn.sender(), Bytes('6'), Txn.application_args[1]),
         # description of task
-        App.localPut(Txn.sender(), Bytes('7'), Txn.application_args[3]),
+        App.localPut(Txn.sender(), Bytes('7'), Txn.application_args[2]),
         # intializes complete to false
-        App.localPut(Txn.sender(), Bytes('8'), Bytes('false')),
+        App.localPut(Txn.sender(), Bytes('8'), Bytes('incomplete')),
         # approve sequence
         Return(Int(1))
     ])
@@ -81,7 +81,7 @@ def approval_program():
         # expecting one app arg
         Assert(Txn.application_args.length() == Int(1)),
         # sets complete to true
-        App.localPut(Txn.sender(), Bytes('2'), Bytes('true')),
+        App.localPut(Txn.sender(), Bytes('2'), Bytes('complete')),
         # approve sequence
         Return(Int(1))
     )
@@ -91,7 +91,7 @@ def approval_program():
         # expecting one app arg
         Assert(Txn.application_args.length() == Int(1)),
         # sets complete to true
-        App.localPut(Txn.sender(), Bytes('5'), Bytes('true')),
+        App.localPut(Txn.sender(), Bytes('5'), Bytes('complete')),
         # approve sequence
         Return(Int(1))
     )
@@ -101,7 +101,7 @@ def approval_program():
         # expecting one app arg
         Assert(Txn.application_args.length() == Int(1)),
         # sets complete to true
-        App.localPut(Txn.sender(), Bytes('8'), Bytes('true')),
+        App.localPut(Txn.sender(), Bytes('8'), Bytes('complete')),
         # approve sequence
         Return(Int(1))
     )
