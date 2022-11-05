@@ -3,6 +3,9 @@ import './App.css';
 import {PeraWalletConnect} from '@perawallet/connect';
 import algosdk from 'algosdk';
 import { useEffect, useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 // instantiates pera wallet connection
 const peraWallet = new PeraWalletConnect();
@@ -27,42 +30,37 @@ function App() {
       }
     })
 
-  })
+  },[]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <h1>Critical Task List</h1>
+      <Row>
+        <Col>
+        </Col>
+      </Row>
+    </Container>
   );
-}
 
-// function that handles the connection to pera wallet through the UI
-function handleConnectionWalletClick() {
-  // sets up disconnect event listener
-  peraWallet.connector?.on('disconnect', handleConnectionWalletClick);
-  // sets the account address to a new account at index zero
-  setAccountAddress(newAccounts[0]);
-}
+  // function that handles the connection to pera wallet through the UI
+  function handleConnectionWalletClick() {
+    // connects the wallet
+    peraWallet.connect().then((newAccounts) => {
+      // sets up disconnect event listener
+      peraWallet.connector?.on('disconnect', handleDisconnectWalletClick);
+      // sets the account address to a new account at index zero
+      setAccountAddress(newAccounts[0]);
+    });
+  }
 
-// function that handles the wallet UI click to disconnect
-function handleDisconnectWalletClick() {
-  // disconnects the wallet
-  peraWallet.disconnect();
-  // sets the account address to null value
-  setAccountAddress(null);
+  // function that handles the wallet UI click to disconnect
+  function handleDisconnectWalletClick() {
+    // disconnects the wallet
+    peraWallet.disconnect();
+    // sets the account address to null value
+    setAccountAddress(null);
+  }
+
 }
 
 export default App;
