@@ -1,0 +1,150 @@
+#pragma version 5
+txn ApplicationID
+int 0
+==
+bnz main_l26
+txn OnCompletion
+int OptIn
+==
+bnz main_l25
+txn OnCompletion
+int CloseOut
+==
+bnz main_l24
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l23
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l22
+txn OnCompletion
+int NoOp
+==
+bnz main_l7
+err
+main_l7:
+txna ApplicationArgs 0
+byte "Set_Item_1"
+==
+bnz main_l21
+txna ApplicationArgs 0
+byte "Set_Item_2"
+==
+bnz main_l20
+txna ApplicationArgs 0
+byte "Set_Item_3"
+==
+bnz main_l19
+txna ApplicationArgs 0
+byte "Mark_Complete_1"
+==
+bnz main_l18
+txna ApplicationArgs 0
+byte "Mark_Complete_2"
+==
+bnz main_l17
+txna ApplicationArgs 0
+byte "Mark_Complete_3"
+==
+bnz main_l16
+txna ApplicationArgs 0
+byte "Change_Title"
+==
+bnz main_l15
+err
+main_l15:
+byte "Title"
+txna ApplicationArgs 1
+app_global_put
+int 1
+return
+main_l16:
+txn Sender
+byte "8"
+byte "true"
+app_local_put
+int 1
+return
+main_l17:
+txn Sender
+byte "5"
+byte "true"
+app_local_put
+int 1
+return
+main_l18:
+txn Sender
+byte "2"
+byte "true"
+app_local_put
+int 1
+return
+main_l19:
+txn Sender
+byte "6"
+txna ApplicationArgs 2
+app_local_put
+txn Sender
+byte "7"
+txna ApplicationArgs 3
+app_local_put
+txn Sender
+byte "8"
+byte "false"
+app_local_put
+int 1
+return
+main_l20:
+txn Sender
+byte "3"
+txna ApplicationArgs 2
+app_local_put
+txn Sender
+byte "4"
+txna ApplicationArgs 3
+app_local_put
+txn Sender
+byte "5"
+byte "false"
+app_local_put
+int 1
+return
+main_l21:
+txn Sender
+byte "0"
+txna ApplicationArgs 2
+app_local_put
+txn Sender
+byte "1"
+txna ApplicationArgs 3
+app_local_put
+txn Sender
+byte "2"
+byte "false"
+app_local_put
+int 1
+return
+main_l22:
+int 0
+return
+main_l23:
+int 0
+return
+main_l24:
+int 0
+return
+main_l25:
+txn Sender
+byte "Array_Length"
+txn LocalNumByteSlice
+app_local_put
+int 1
+return
+main_l26:
+byte "Dapp_Title"
+byte "Critical Task List"
+app_global_put
+int 1
+return
