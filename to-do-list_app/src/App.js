@@ -23,6 +23,7 @@ function App() {
   // state of connection to pera wallet
   const isConnectedToPeraWallet = !!accountAddress;
 
+  // hooks are defined here
   useEffect(() => {
     // when component is mounted reconnect pera wallet session
     peraWallet.reconnectSession().then((accounts) => {
