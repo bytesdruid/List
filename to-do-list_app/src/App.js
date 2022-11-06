@@ -63,6 +63,17 @@ function App() {
     </Container>
   );
 
+  // function for setting the first item values
+  async function callSetItem1(action) {
+    try {
+      // get suggester txn params from algod
+      const suggestedParams = await algod.getTransactionParams().do();
+      // set the application argument from the action being passed in
+      const appArgs = [new Uint8Array(Buffer.from(action))];
+
+    }
+  }
+
   // function that opts account into application
   async function optInToApp() {
     const suggestedParams = await algod.getTransactionParams().do();
