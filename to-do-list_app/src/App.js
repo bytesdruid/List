@@ -49,14 +49,20 @@ function App() {
             {isConnectedToPeraWallet ? "Disconnect": "Connect to Pera Wallet"}
           </Button>
         </div>
-      </div>
-      <div>
         <div className='centered-div'>
           <Button variant='outlined' color="primary"
             onClick={
               () => optInToApp()
             }>
             Opt-in
+          </Button>
+        </div>
+        <div className='centered-div'>
+          <Button variant='outlined' color="primary"
+            onClick={
+              () => callToDoListApp('Set_Item_1')
+            }>
+            Set Item 1
           </Button>
         </div>
       </div>
