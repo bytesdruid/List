@@ -60,9 +60,21 @@ function App() {
         <div className='centered-div'>
           <Button variant='outlined' color="primary"
             onClick={
+              () => callToDoListApp('Mark_Complete_1')
+            }>
+            Mark Complete 1
+          </Button>
+          <Button variant='outlined' color="primary"
+            onClick={
               () => callToDoListApp('Mark_Complete_2')
             }>
             Mark Complete 2
+          </Button>
+          <Button variant='outlined' color="primary"
+            onClick={
+              () => callToDoListApp('Mark_Complete_3')
+            }>
+            Mark Complete 3
           </Button>
         </div>
       </div>
