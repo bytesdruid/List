@@ -109,14 +109,17 @@ function App() {
       // app arg array
       const appArgs = [];
       // add the first argument to the app arg array
-      appArgs.push = [new Uint8Array(Buffer.from(appArg1))];
+      appArgs.push([...(new Uint8Array(Buffer.from(appArg1)))]);
+      console.log(appArgs);
       // add the first argument to the app arg array
-      appArgs.push = [new Uint8Array(Buffer.from(appArg2))];
+      appArgs.push([...(new Uint8Array(Buffer.from(appArg2)))]);
+      console.log(appArgs);
       // add the first argument to the app arg array
-      appArgs.push = [new Uint8Array(Buffer.from(appArg3))];      
+      appArgs.push([...(new Uint8Array(Buffer.from(appArg3)))]);
+      console.log(appArgs);
       // this has all txn params
       const actionTx = algosdk.makeApplicationNoOpTxn(
-          accountAddress,
+          accountAddress,new
           suggestedParams,
           appIndex,
           appArgs
