@@ -107,19 +107,19 @@ function App() {
       // get suggester txn params from algod
       const suggestedParams = await algod.getTransactionParams().do();
       // app arg array
-      const appArgs = [];
-      // add the first argument to the app arg array
-      appArgs.push([...(new Uint8Array(Buffer.from(appArg1)))]);
-      console.log(appArgs);
-      // add the first argument to the app arg array
-      appArgs.push([...(new Uint8Array(Buffer.from(appArg2)))]);
-      console.log(appArgs);
-      // add the first argument to the app arg array
-      appArgs.push([...(new Uint8Array(Buffer.from(appArg3)))]);
-      console.log(appArgs);
+      const appArgs = new Uint8Array([appArg1, appArg2, appArg3]);
+      // // add the first argument to the app arg array
+      // appArgs.push([...(new Uint8Array(Buffer.from(appArg1)))]);
+      // console.log(appArgs);
+      // // add the first argument to the app arg array
+      // appArgs.push([...(new Uint8Array(Buffer.from(appArg2)))]);
+      // console.log(appArgs);
+      // // add the first argument to the app arg array
+      // appArgs.push([...(new Uint8Array(Buffer.from(appArg3)))]);
+      // console.log(appArgs);
       // this has all txn params
       const actionTx = algosdk.makeApplicationNoOpTxn(
-          accountAddress,new
+          accountAddress,
           suggestedParams,
           appIndex,
           appArgs
@@ -134,7 +134,7 @@ function App() {
       const { txId } = await algod.sendRawTransaction(signedTx).do();
       const result = await waitForConfirmation(algod, txId, 2);
     } catch (e) {
-      console.error(`There was an error setting item 1: ${e}`);
+      console.error(`There was an error setting item: ${e}`);
     }
   }
 
@@ -162,7 +162,7 @@ function App() {
       const { txId } = await algod.sendRawTransaction(signedTx).do();
       const result = await waitForConfirmation(algod, txId, 2);
     } catch (e) {
-      console.error(`There was an error setting item 1: ${e}`);
+      console.error(`There was an error completing item: ${e}`);
     }
   }
 
