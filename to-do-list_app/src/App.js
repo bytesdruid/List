@@ -60,19 +60,39 @@ function App() {
         <div className='centered-div'>
           <Button variant='outlined' color="primary"
             onClick={
-              () => callToDoListApp('Mark_Complete_1')
+              () => callSetToDoListItem('Set_Item_1', 'Title 1', 'Description 1')
+            }>
+            Set Item 1
+          </Button>
+          <Button variant='outlined' color="primary"
+            onClick={
+              () => callSetToDoListItem('Set_Item_2', 'Title 2', 'Description 2')
+            }>
+            Set Item 2
+          </Button>
+          <Button variant='outlined' color="primary"
+            onClick={
+              () => callSetToDoListItem('Set_Item_3', 'Title 3', 'Description 3')
+            }>
+            Set Item 3
+          </Button>
+        </div>
+        <div className='centered-div'>
+          <Button variant='outlined' color="primary"
+            onClick={
+              () => callCompleteToDoListItem('Mark_Complete_1')
             }>
             Mark Complete 1
           </Button>
           <Button variant='outlined' color="primary"
             onClick={
-              () => callToDoListApp('Mark_Complete_2')
+              () => callCompleteToDoListItem('Mark_Complete_2')
             }>
             Mark Complete 2
           </Button>
           <Button variant='outlined' color="primary"
             onClick={
-              () => callToDoListApp('Mark_Complete_3')
+              () => callCompleteToDoListItem('Mark_Complete_3')
             }>
             Mark Complete 3
           </Button>
@@ -82,12 +102,46 @@ function App() {
   );
 
   // function for making noop calls to Algorand application
-  async function callToDoListApp(action) {
+  async function callSetToDoListItem(appArg1, appArg2, appArg3) {
+    try {
+      // get suggester txn params from algod
+      const suggestedParams = await algod.getTransactionParams().do();
+      // app arg array
+      const appArgs = [];
+      // add the first argument to the app arg array
+      appArgs.push = [new Uint8Array(Buffer.from(appArg1))];
+      // add the first argument to the app arg array
+      appArgs.push = [new Uint8Array(Buffer.from(appArg2))];
+      // add the first argument to the app arg array
+      appArgs.push = [new Uint8Array(Buffer.from(appArg3))];      
+      // this has all txn params
+      const actionTx = algosdk.makeApplicationNoOpTxn(
+          accountAddress,
+          suggestedParams,
+          appIndex,
+          appArgs
+      );
+      // has txn info and signer info
+      const actionTxGroup = [{txn: actionTx, signers: [accountAddress]}];
+      // execute the txn
+      const signedTx = await peraWallet.signTransaction([actionTxGroup]);
+      // print the txn results object
+      console.log(signedTx)
+      // get the txn id from algod
+      const { txId } = await algod.sendRawTransaction(signedTx).do();
+      const result = await waitForConfirmation(algod, txId, 2);
+    } catch (e) {
+      console.error(`There was an error setting item 1: ${e}`);
+    }
+  }
+
+  // function for making noop calls to Algorand application
+  async function callCompleteToDoListItem(appArg1) {
     try {
       // get suggester txn params from algod
       const suggestedParams = await algod.getTransactionParams().do();
       // set the application argument from the action being passed in
-      const appArgs = [new Uint8Array(Buffer.from(action))];
+      const appArgs = [new Uint8Array(Buffer.from(appArg1))];
       // this has all txn params
       const actionTx = algosdk.makeApplicationNoOpTxn(
           accountAddress,
