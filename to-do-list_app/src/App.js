@@ -63,14 +63,31 @@ function App() {
     </Container>
   );
 
-  // function for setting the first item values
-  async function callSetItem1(action) {
+  // function for making noop calls to Algorand application
+  async function callToDoListApp(action) {
     try {
       // get suggester txn params from algod
       const suggestedParams = await algod.getTransactionParams().do();
       // set the application argument from the action being passed in
       const appArgs = [new Uint8Array(Buffer.from(action))];
-
+      // this has all txn params
+      const actionTx = algosdk.makeApplicationNoOpTxn(
+          accountAddress,
+          suggestedParams,
+          appIndex,
+          appArgs
+      );
+      // has txn info and signer info
+      const actionTxGroup = [{txn: actionTx, signers: [accountAddress]}];
+      // execute the txn
+      const signedTx = await peraWallet.signTransaction([actionTxGroup]);
+      // print the txn results object
+      console.log(signedTx)
+      // get the txn id from algod
+      const { txId } = await algod.sendRawTransaction(signedTx).do();
+      const result = await waitForConfirmation(algod, txId, 2);
+    } catch (e) {
+      console.error(`There was an error setting item 1: ${e}`);
     }
   }
 
