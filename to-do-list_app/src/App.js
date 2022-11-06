@@ -60,9 +60,9 @@ function App() {
         <div className='centered-div'>
           <Button variant='outlined' color="primary"
             onClick={
-              () => callToDoListApp('Set_Item_1')
+              () => callToDoListApp('Mark_Complete_2')
             }>
-            Set Item 1
+            Mark Complete 2
           </Button>
         </div>
       </div>
