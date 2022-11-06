@@ -104,19 +104,19 @@ function App() {
   // function for making noop calls to Algorand application
   async function callSetToDoListItem(appArg1, appArg2, appArg3) {
     try {
-      // get suggester txn params from algod
+      // get suggested txn params from algod
       const suggestedParams = await algod.getTransactionParams().do();
       // app arg array
-      const appArgs = new Uint8Array([appArg1, appArg2, appArg3]);
-      // // add the first argument to the app arg array
-      // appArgs.push([...(new Uint8Array(Buffer.from(appArg1)))]);
-      // console.log(appArgs);
-      // // add the first argument to the app arg array
-      // appArgs.push([...(new Uint8Array(Buffer.from(appArg2)))]);
-      // console.log(appArgs);
-      // // add the first argument to the app arg array
-      // appArgs.push([...(new Uint8Array(Buffer.from(appArg3)))]);
-      // console.log(appArgs);
+      const appArgs = [];
+      // add the first argument to the app arg array
+      appArgs.push(...(new Uint8Array(Buffer.from(appArg1))));
+      console.log(appArgs);
+      // add the second argument to the app arg array
+      appArgs.push(...(new Uint8Array(Buffer.from(appArg2))));
+      console.log(appArgs);
+      // add the third argument to the app arg array
+      appArgs.push(...(new Uint8Array(Buffer.from(appArg3))));
+      console.log(appArgs);
       // this has all txn params
       const actionTx = algosdk.makeApplicationNoOpTxn(
           accountAddress,
